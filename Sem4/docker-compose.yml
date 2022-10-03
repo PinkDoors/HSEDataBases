@@ -1,0 +1,16 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres:14.5
+    environment:
+      POSTGRES_DB: "butchenko_206"
+      POSTGRES_USER: "butchenko_206"
+      POSTGRES_PASSWORD: "butchenko_206"
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    volumes:
+      - ./docker/db/scripts/train_logistics.sql:/docker-entrypoint-initdb.d/train_logistics.sql
+      - ./docker/db/scripts/hospital.sql:/docker-entrypoint-initdb.d/hospital.sql
+      - ./docker/db/scripts/library.sql:/docker-entrypoint-initdb.d/library.sql
+      - ./docker/db/postgresql/data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
